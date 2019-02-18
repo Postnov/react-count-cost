@@ -20,35 +20,61 @@ export default class Item extends Component {
             [label]: e.target.value
         });
 
+        if (label !== 'label') {
+            const total = this.costTotal();
+
+            if (total) {
+                this.setState({ costTotal: total});
+            }
+        }
+
         this.props.onUpdateItem(state);
     }
 
+
+    costTotal() {
+        let {cost, value, costPerClient} = this.state;
+        let total;
+
+        if (+cost !== 0 && +value !== 0 && +costPerClient !== 0) {
+            total = (+cost / +value) * +costPerClient;
+            total = total.toFixed(2);
+            return total;
+        }
+    }
+
     render() {
+        let {label, cost, value, costPerClient, costTotal} = this.state;
+
         return (
             <div className="item">
                 <input
                     type="text"
                     onChange={(e) => this.updateItem(e, 'label')}
-                    value={this.state.label}
+                    onKeyUp={(e) => this.updateItem(e, 'label')}
+                    value={label}
                     placeholder="Наименование" />
                 <input
                     type="number"
                     onChange={(e) => this.updateItem(e, 'cost')}
-                    value={this.state.cost}
+                    onKeyUp={(e) => this.updateItem(e, 'cost')}
+                    value={cost}
                     placeholder="Стоимость" />
                 <input
                     type="number"
                     onChange={(e) => this.updateItem(e, 'value')}
-                    value={this.state.value}
+                    onKeyUp={(e) => this.updateItem(e, 'value')}
+                    value={value}
                     placeholder="Объем" />
                 <input
                     type="number"
                     onChange={(e) => this.updateItem(e, 'costPerClient')}
-                    value={this.state.costPerClient}
+                    onKeyUp={(e) => this.updateItem(e, 'costPerClient')}
+                    value={costPerClient}
                     placeholder="Трата на единицу" />
 
                 <div className="price">
-                    <span className="item__sum-one"> { this.state.costTotal }</span>
+                    <span className="item__sum-one"> { costTotal }</span>
                     <span> руб.</span>
                 </div>
 
