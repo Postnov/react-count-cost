@@ -41,6 +41,13 @@ export default class App extends Component {
         this.setState({items: newArray});
     }
 
+    addItem = () => {
+        const newItem = this.createItem();
+        const newArray = [...this.state.items, newItem];
+
+        this.setState({items: newArray});
+    }
+
     render() {
         let {items} = this.state;
         return (
@@ -48,7 +55,7 @@ export default class App extends Component {
                 <ListItems
                     items={items}
                     onUpdateItem={this.onUpdateItem}/>
-                <SidePanel />
+                <SidePanel addItem={this.addItem}/>
 
                 <footer className="footer">
                     <p className="footer__item">Расчет себестоимости (vue.js)</p>
