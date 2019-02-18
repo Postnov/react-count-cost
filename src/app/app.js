@@ -13,7 +13,8 @@ export default class App extends Component {
     state = {
         items: [
             this.createItem(),
-        ]
+        ],
+        costTotal: 0
     }
 
     createItem() {
@@ -25,10 +26,6 @@ export default class App extends Component {
             costTotal: 0,
             id: this.maxId++
         }
-    }
-
-    onItemCount() {
-
     }
 
     onUpdateItem = (item) => {
@@ -48,14 +45,30 @@ export default class App extends Component {
         this.setState({items: newArray});
     }
 
+    onCountAll = () => {
+        let {items, costTotal} = this.state;
+
+        let total = costTotal;
+
+        items.forEach((el) => {
+            total += +el.costTotal;
+        });
+
+        this.setState({ costTotal: total });
+    }
+
     render() {
-        let {items} = this.state;
+        let {items, costTotal} = this.state;
         return (
             <div className="app">
                 <ListItems
                     items={items}
-                    onUpdateItem={this.onUpdateItem}/>
-                <SidePanel addItem={this.addItem}/>
+                    onUpdateItem={this.onUpdateItem}
+                    onCountAll={this.onCountAll}/>
+
+                <SidePanel
+                    addItem={this.addItem}
+                    costTotal={costTotal}/>
 
                 <footer className="footer">
                     <p className="footer__item">Расчет себестоимости (vue.js)</p>

@@ -29,6 +29,10 @@ export default class Item extends Component {
         }
 
         this.props.onUpdateItem(state);
+
+        if (this.state.costTotal) {
+            this.props.onCountAll();
+        }
     }
 
 
@@ -44,33 +48,25 @@ export default class Item extends Component {
     }
 
     render() {
-        let {label, cost, value, costPerClient, costTotal} = this.state;
+        let {costTotal} = this.state;
 
         return (
             <div className="item">
                 <input
                     type="text"
-                    onChange={(e) => this.updateItem(e, 'label')}
                     onKeyUp={(e) => this.updateItem(e, 'label')}
-                    value={label}
                     placeholder="Наименование" />
                 <input
                     type="number"
-                    onChange={(e) => this.updateItem(e, 'cost')}
                     onKeyUp={(e) => this.updateItem(e, 'cost')}
-                    value={cost}
                     placeholder="Стоимость" />
                 <input
                     type="number"
-                    onChange={(e) => this.updateItem(e, 'value')}
                     onKeyUp={(e) => this.updateItem(e, 'value')}
-                    value={value}
                     placeholder="Объем" />
                 <input
                     type="number"
-                    onChange={(e) => this.updateItem(e, 'costPerClient')}
                     onKeyUp={(e) => this.updateItem(e, 'costPerClient')}
-                    value={costPerClient}
                     placeholder="Трата на единицу" />
 
                 <div className="price">

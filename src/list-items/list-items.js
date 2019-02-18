@@ -5,7 +5,7 @@ import './list-items.css';
 
 const ListItems = (props) => {
 
-    let {items, onUpdateItem} = props;
+    let {items, onUpdateItem, onCountAll} = props;
 
     const elements = items.map((item) => {
         return (
@@ -13,6 +13,7 @@ const ListItems = (props) => {
                 <Item
                     {...item}
                     onUpdateItem={(state) => onUpdateItem(state)}
+                    onCountAll={() => onCountAll()}
                 />
             </li>
         )
