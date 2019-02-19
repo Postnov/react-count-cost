@@ -35,6 +35,15 @@ export default class App extends Component {
         this.setState({items: newArray});
     }
 
+    removeItem = (id) => {
+
+        const newArray = this.state.items.filter((el) => {
+            return el.id !== id;
+        })
+
+        this.setState({items: newArray});
+    }
+
 
     onUpdateItem = (item) => {
         let newItem = item;
@@ -84,7 +93,8 @@ export default class App extends Component {
                 <ListItems
                     items={items}
                     onUpdateItem={this.onUpdateItem}
-                    onCountAll={this.onCountAll}/>
+                    onCountAll={this.onCountAll}
+                    removeItem={this.removeItem}/>
 
                 <SidePanel
                     addItem={this.addItem}
