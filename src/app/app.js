@@ -55,7 +55,9 @@ export default class App extends Component {
             return el;
         });
 
-        this.setState({items: newArray});
+        this.setState({items: newArray}, () => {
+            this.onCountAll();
+        });
     }
 
     costTotal(item) {
@@ -65,8 +67,6 @@ export default class App extends Component {
         if (+cost !== 0 && +value !== 0 && +costPerClient !== 0) {
             total = (+cost / +value) * +costPerClient;
             total = total.toFixed(2);
-
-            this.onCountAll();
 
             return total;
         }

@@ -16,12 +16,13 @@ export default class Item extends Component {
     updateItem(e, label) {
         let value = e.target.value
 
-        this.setState((state) => {
-            state[label] = value;
-            return {state}
+        this.setState({
+            [label]: value
+        }, () => {
+            this.props.onUpdateItem(this.state);
         });
 
-        this.props.onUpdateItem(this.state);
+
     }
 
     clearItem() {
@@ -44,31 +45,27 @@ export default class Item extends Component {
             <div className="item">
                 <input
                     type="text"
-                    onKeyUp={(e) => this.updateItem(e, 'label')}
                     onChange={(e) => this.updateItem(e, 'label')}
                     value={label}
                     placeholder="Наименование" />
                 <input
                     type="number"
-                    onKeyUp={(e) => this.updateItem(e, 'cost')}
                     onChange={(e) => this.updateItem(e, 'cost')}
                     value={cost}
                     placeholder="Стоимость" />
                 <input
                     type="number"
-                    onKeyUp={(e) => this.updateItem(e, 'value')}
                     onChange={(e) => this.updateItem(e, 'value')}
                     value={value}
                     placeholder="Объем" />
                 <input
                     type="number"
-                    onKeyUp={(e) => this.updateItem(e, 'costPerClient')}
                     onChange={(e) => this.updateItem(e, 'costPerClient')}
                     value={costPerClient}
                     placeholder="Трата на единицу" />
 
                 <div className="price">
-                    <span className="item__sum-one"> { costTotal }</span>
+                    <span className="item__sum-one"> { costTotal || 0 }</span>
                     <span> руб.</span>
                 </div>
 
