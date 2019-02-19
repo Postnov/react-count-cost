@@ -23,7 +23,7 @@ export default class App extends Component {
             cost: '',
             value: '',
             costPerClient: '',
-            costTotal: 0,
+            costTotal: '',
             id: this.maxId++
         }
     }
@@ -70,6 +70,8 @@ export default class App extends Component {
 
             return total;
         }
+
+        return 0;
 
     }
 
