@@ -15,36 +15,14 @@ export default class Item extends Component {
 
     updateItem(e, label) {
         let {state} = this;
+        let value = e.target.value
 
-        this.setState({
-            [label]: e.target.value
+        this.setState((state) => {
+            state[label] = value;
+            return {state}
         });
 
-        if (label !== 'label') {
-            const total = this.costTotal();
-
-            if (total) {
-                this.setState({ costTotal: total});
-            }
-        }
-
         this.props.onUpdateItem(state);
-
-        if (this.state.costTotal) {
-            this.props.onCountAll();
-        }
-    }
-
-
-    costTotal() {
-        let {cost, value, costPerClient} = this.state;
-        let total;
-
-        if (+cost !== 0 && +value !== 0 && +costPerClient !== 0) {
-            total = (+cost / +value) * +costPerClient;
-            total = total.toFixed(2);
-            return total;
-        }
     }
 
     render() {
@@ -55,18 +33,22 @@ export default class Item extends Component {
                 <input
                     type="text"
                     onKeyUp={(e) => this.updateItem(e, 'label')}
+                    onChange={(e) => this.updateItem(e, 'label')}
                     placeholder="Наименование" />
                 <input
                     type="number"
                     onKeyUp={(e) => this.updateItem(e, 'cost')}
+                    onChange={(e) => this.updateItem(e, 'cost')}
                     placeholder="Стоимость" />
                 <input
                     type="number"
                     onKeyUp={(e) => this.updateItem(e, 'value')}
+                    onChange={(e) => this.updateItem(e, 'value')}
                     placeholder="Объем" />
                 <input
                     type="number"
                     onKeyUp={(e) => this.updateItem(e, 'costPerClient')}
+                    onChange={(e) => this.updateItem(e, 'costPerClient')}
                     placeholder="Трата на единицу" />
 
                 <div className="price">

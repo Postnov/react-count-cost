@@ -5,15 +5,14 @@ import './list-items.css';
 
 const ListItems = (props) => {
 
-    let {items, onUpdateItem, onCountAll} = props;
+    let {items, onUpdateItem} = props;
 
     const elements = items.map((item) => {
         return (
             <li key={item.id}>
                 <Item
                     {...item}
-                    onUpdateItem={(state) => onUpdateItem(state)}
-                    onCountAll={() => onCountAll()}
+                    onUpdateItem={onUpdateItem}
                 />
             </li>
         )

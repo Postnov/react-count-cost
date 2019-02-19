@@ -28,16 +28,6 @@ export default class App extends Component {
         }
     }
 
-    onUpdateItem = (item) => {
-        const newItem = item;
-        const newArray = this.state.items.map((el) => {
-            if (newItem.id === el.id) return newItem;
-            return el;
-        });
-
-        this.setState({items: newArray});
-    }
-
     addItem = () => {
         const newItem = this.createItem();
         const newArray = [...this.state.items, newItem];
@@ -45,10 +35,39 @@ export default class App extends Component {
         this.setState({items: newArray});
     }
 
-    onCountAll = () => {
-        let {items, costTotal} = this.state;
 
-        let total = costTotal;
+    onUpdateItem = (item) => {
+        let newItem = item;
+
+        newItem.costTotal = this.costTotal(newItem);
+
+        let newArray = this.state.items.map((el) => {
+            if (newItem.id === el.id) return newItem;
+            return el;
+        });
+
+        this.setState({items: newArray});
+    }
+
+    costTotal(item) {
+        let {cost, value, costPerClient} = item;
+        let total;
+
+        if (+cost !== 0 && +value !== 0 && +costPerClient !== 0) {
+            total = (+cost / +value) * +costPerClient;
+            total = total.toFixed(2);
+
+            this.onCountAll();
+
+            return total;
+        }
+
+    }
+
+    onCountAll = () => {
+        let {items} = this.state;
+
+        let total = 0;
 
         items.forEach((el) => {
             total += +el.costTotal;
@@ -59,6 +78,7 @@ export default class App extends Component {
 
     render() {
         let {items, costTotal} = this.state;
+
         return (
             <div className="app">
                 <ListItems
@@ -68,7 +88,7 @@ export default class App extends Component {
 
                 <SidePanel
                     addItem={this.addItem}
-                    costTotal={costTotal}/>
+                    costTotal={costTotal || 0}/>
 
                 <footer className="footer">
                     <p className="footer__item">Расчет себестоимости (vue.js)</p>
