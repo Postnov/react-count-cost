@@ -101,7 +101,7 @@ export default class App extends Component {
                     costTotal={costTotal || 0}/>
 
                 <footer className="footer">
-                    <p className="footer__item">Расчет себестоимости (vue.js)</p>
+                    <p className="footer__item">Расчет себестоимости (react.js)</p>
                     <span className="footer__item"><a target="blank" href="https://vk.com/postnov_daniil">Постнов Даниил</a></span>
                 </footer>
             </div>
