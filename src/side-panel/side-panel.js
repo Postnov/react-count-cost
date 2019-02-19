@@ -2,7 +2,7 @@ import React from 'react';
 
 import './side-panel.css';
 
-const SidePanel = ({addItem, costTotal}) => {
+const SidePanel = ({addItem, costTotal, lengthItems}) => {
 
     return (
         <aside className="side-panel">
@@ -10,7 +10,7 @@ const SidePanel = ({addItem, costTotal}) => {
                 <button className="add-item" onClick={addItem}>+</button>
             </div>
             <div className="side-panel__item">
-                <span>1</span>пунктов
+                <span>{lengthItems}</span>пунктов
             </div>
             <div className="side-panel__item ">
                 <span>{costTotal}</span> руб. на единицу

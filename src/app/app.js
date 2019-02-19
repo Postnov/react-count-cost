@@ -98,7 +98,8 @@ export default class App extends Component {
 
                 <SidePanel
                     addItem={this.addItem}
-                    costTotal={costTotal || 0}/>
+                    costTotal={costTotal || 0}
+                    lengthItems={items.length}/>
 
                 <footer className="footer">
                     <p className="footer__item">Расчет себестоимости (react.js)</p>
