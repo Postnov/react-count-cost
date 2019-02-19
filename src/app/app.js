@@ -41,7 +41,9 @@ export default class App extends Component {
             return el.id !== id;
         })
 
-        this.setState({items: newArray});
+        this.setState({items: newArray}, () => {
+            this.onCountAll();
+        });
     }
 
 

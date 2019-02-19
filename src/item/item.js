@@ -32,9 +32,11 @@ export default class Item extends Component {
             value: '',
             costPerClient: '',
             costTotal: 0
+        }, () => {
+            this.props.onUpdateItem(this.state);
         });
 
-        this.props.onUpdateItem(this.state);
+
     }
 
     render() {
